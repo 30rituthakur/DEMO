@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Image Gallery</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        #imageViewer {
+            width: 600px;
+            height: 450px;
+            border: 2px solid #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        #imageViewer img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .thumbnails {
+            display: flex;
+            justify-content: center;
+        }
+        .thumbnails img {
+            width: 100px;
+            height: 80px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .tooltip {
+            position: absolute;
+            background: #000;
+            color: #fff;
+            padding: 5px;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="imageViewer">
+        <img id="fullImage" src="flower1.jpeg" alt="Full View">
+    </div>
+    <div class="thumbnails">
+        <img src="flower1.jpeg" title="Image 1" onclick="changeImage(this)" onmouseover="showTooltip(event, this)" onmouseout="hideTooltip()">
+        <img src="flower2.jpeg" title="Image 2" onclick="changeImage(this)" onmouseover="showTooltip(event, this)" onmouseout="hideTooltip()">
+        <img src="flower3.jpeg" title="Image 3" onclick="changeImage(this)" onmouseover="showTooltip(event, this)" onmouseout="hideTooltip()">
+    </div>
+    <div id="tooltip" class="tooltip"></div>
+    
+    <script>
+        function changeImage(thumbnail) {
+            document.getElementById("fullImage").src = thumbnail.src;
+        }
+
+        function showTooltip(event, thumbnail) {
+            const tooltip = document.getElementById("tooltip");
+            tooltip.innerText = thumbnail.title;
+            tooltip.style.display = "block";
+            tooltip.style.left = event.pageX + 10 + "px";
+            tooltip.style.top = event.pageY + 10 + "px";
+        }
+
+        function hideTooltip() {
+            document.getElementById("tooltip").style.display = "none";
+        }
+    </script>
+</body>
+</html>
